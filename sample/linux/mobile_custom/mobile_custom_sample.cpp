@@ -42,8 +42,28 @@ void
 parseFromMobileCallback(Vehicle* vehicle, RecvContainer recvFrame,
                         UserData userData)
 {
+  DSTATUS("2.receive data");
+  //DSTATUS(&recvFrame.recvData.raw_ack_array);
+  ACK::ErrorCode ack1;
+  ack1.data = OpenProtocolCMD::ErrorCode::CommonACK::NO_RESPONSE_ERROR;
+
+  //unsigned char data    = 0x1;
+  //int           cbIndex = vehiclePtr->callbackIdIndex();
+
+  if (recvFrame.recvInfo.len - OpenProtocol::PackageMin <= sizeof(uint16_t))
+  {
+    ack1.data = recvFrame.recvData.ack;
+    ack1.info = recvFrame.recvInfo;
+  }
+  else
+  {
+    DERROR("ACK is exception, sequence %s\n", recvFrame.recvData);
+  }
+  
+  DSTATUS("2.1");
   // First, lets cast the userData to LinuxSetup*
   LinuxSetup* linuxEnvironment = (LinuxSetup*)userData;
+  //string receiveTest;
   uint16_t    mobile_data_id;
   mobile_data_id =
     *(reinterpret_cast<uint16_t*>(&recvFrame.recvData.raw_ack_array));
@@ -53,15 +73,18 @@ parseFromMobileCallback(Vehicle* vehicle, RecvContainer recvFrame,
   uint8_t wayptPolygonSides;
   int     hotptInitRadius;
   int     responseTimeout = 1;
-  DDEBUG("Received data from mobile\n");
+  DSTATUS("Received data from mobile\n");
 }
 
 bool
 setupMSDKParsing(Vehicle* vehicle, LinuxSetup* linuxEnvironment)
 {
+  //DSTAUS("1");
+  //DERROR("1");
+  //DDEBUG("1");
   // First, register the callback for parsing mobile data
   vehicle->moc->setFromMSDKCallback(parseFromMobileCallback, linuxEnvironment);
-
+  DSTATUS("Initial 1. set mobile callback for parsing\n");
   // Then, setup a thread to poll the incoming data, for large functions
   pthread_t threadID = setupSamplePollingThread(vehicle);
 

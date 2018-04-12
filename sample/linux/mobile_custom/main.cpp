@@ -45,7 +45,8 @@ main(int argc, char** argv)
     std::cout << "Vehicle not initialized, exiting.\n";
     return -1;
   }
-
+  DSTATUS("0");
+  DDEBUG("0");
   setupMSDKParsing(vehicle, &linuxEnvironment);
 
   return 0;
