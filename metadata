@@ -1,0 +1,26 @@
+About	DJI Meta Data
+ModifyDate	2017:12:04
+CreateDate	2017:12:04
+Make	DJI
+Model	FC6310
+Format	image/jpg
+AbsoluteAltitude	+142.70
+RelativeAltitude	+45.60
+GimbalRollDegree	+0.00
+GimbalYawDegree	+64.90
+GimbalPitchDegree	-21
+FlightRollDegree	+2.50
+FlightYawDegree	+62.90
+FlightPitchDegree	-4.2
+CamReverse	0
+GimbalReverse	0
+Version	7
+
+
+GPSVersionID	2.3.0.0
+GPSLatitudeRef	South
+GPSLatitude	27.56603
+GPSLongitudeRef	East
+GPSLongitude	153.220676
+GPSAltitudeRef	Above Sea Level
+GPSAltitude	142.703 m
